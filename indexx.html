@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Booking</title>
+</head>
+<body>
+    <h1>Movies</h1>
+    <ul id="movieList"></ul>
+
+    <script>
+        fetch('http://localhost:3000/movies')
+            .then(res => res.json())
+            .then(movies => {
+                const ul = document.getElementById('movieList');
+                movies.forEach(movie => {
+                    const li = document.createElement('li');
+                    li.innerText = ${movie.title} (${movie.genre});
+                    ul.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
