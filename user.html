@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Movie Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .seat {
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+      display: inline-block;
+      background-color: #eee;
+      text-align: center;
+      line-height: 30px;
+      cursor: pointer;
+    }
+    .seat.selected {
+      background-color: #6c6;
+    }
+    .seat.booked {
+      background-color: #f66;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎬 Movie Booking System</h1>
+
+  <label for="movie">Select Movie:</label>
+  <select id="movie">
+    <option value="Avengers">Avengers</option>
+    <option value="Inception">Inception</option>
+    <option value="Interstellar">Interstellar</option>
+    <option value="The Matrix">The Matrix</option>
+    <option value="Titanic">Titanic</option>
+    <option value="Jurassic Park">Jurassic Park</option>
+    <option value="The Dark Knight">The Dark Knight</option>
+    <option value="Avatar">Avatar</option>
+    <option value="The Lion King">The Lion King</option>
+    <option value="Spider-Man: No Way Home">Spider-Man: No Way Home</option>
+  </select>
+
+  <h2>Select Your Seats</h2>
+  <div id="seat-container"></div>
+
+  <button onclick="bookSeats()">Book Selected Seats</button>
+
+  <h2>Booking Summary</h2>
+  <p id="summary">No booking yet.</p>
+
+  <script>
+    const seatContainer = document.getElementById("seat-container");
+    const summary = document.getElementById("summary");
+    const movieSelect = document.getElementById("movie");
+
+    const seats = [];
+
+    // Initialize seat layout (5 rows x 6 seats = 30)
+    for (let i = 1; i <= 30; i++) {
+      seats[i] = { booked: false };
+    }
+
+    function renderSeats() {
+      seatContainer.innerHTML = "";
+      for (let i = 1; i <= 30; i++) {
+        const seat = document.createElement("div");
+        seat.className = "seat";
+        if (seats[i].booked) seat.classList.add("booked");
+        seat.textContent = i;
+        seat.dataset.seat = i;
+
+        if (!seats[i].booked) {
+          seat.addEventListener("click", () => {
+            seat.classList.toggle("selected");
+          });
+        }
+
+        seatContainer.appendChild(seat);
+        if (i % 6 === 0) seatContainer.appendChild(document.createElement("br"));
+      }
+    }
+
+    function bookSeats() {
+      const selectedSeats = document.querySelectorAll(".seat.selected");
+      const seatNumbers = [];
+
+      selectedSeats.forEach(seat => {
+        const num = parseInt(seat.dataset.seat);
+        seats[num].booked = true;
+        seatNumbers.push(num);
+      });
+
+      if (seatNumbers.length > 0) {
+        summary.textContent = 🎟 Booked seats ${seatNumbers.join(", ")} for "${movieSelect.value}";
+      } else {
+        summary.textContent = "No seats selected.";
+      }
+
+      renderSeats();
+    }
+
+    // Initial render
+    renderSeats();
+  </script>
+
+</body>
+</html>
