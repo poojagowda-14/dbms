@@ -1,44 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Movie Ticket Booking</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f2f2f2;
-    }
-    h1 {
-      color: #333;
-    }
-    .movie {
-      background: white;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Available Movies</h1>
-  <div class="movie">
-    <h3>Inception</h3>
-    <p>Genre: Sci-Fi</p>
-    <p>Duration: 148 mins</p>
-  </div>
-  <div class="movie">
-    <h3>Titanic</h3>
-    <p>Genre: Romance</p>
-    <p>Duration: 195 mins</p>
-  </div>
-  <div class="movie">
-    <h3>The Dark Knight</h3>
-    <p>Genre: Action</p>
-    <p>Duration: 152 mins</p>
-  </div>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Movie Ticket Booking</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">Theatres</a></li>
+                    <li><a href="#">Bookings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Movie Section -->
+    <section class="movies">
+        <div class="container">
+            <h2>Choose Your Movie</h2>
+            <div class="movie-list">
+                <div class="movie-card">
+                    <img src="inception.jpg" alt="Inception">
+                    <h3>Inception</h3>
+                    <p>Genre: Sci-Fi</p>
+                    <p>Duration: 148 minutes</p>
+                    <button class="book-btn" onclick="showBookingForm('Inception')">Book Now</button>
+                </div>
+                <div class="movie-card">
+                    <img src="titanic.jpg" alt="Titanic">
+                    <h3>Titanic</h3>
+                    <p>Genre: Romance</p>
+                    <p>Duration: 195 minutes</p>
+                    <button class="book-btn" onclick="showBookingForm('Titanic')">Book Now</button>
+                </div>
+                <div class="movie-card">
+                    <img src="dark_knight.jpg" alt="The Dark Knight">
+                    <h3>The Dark Knight</h3>
+                    <p>Genre: Action</p>
+                    <p>Duration: 152 minutes</p>
+                    <button class="book-btn" onclick="showBookingForm('The Dark Knight')">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section class="booking-form" id="booking-form">
+        <div class="container">
+            <h2>Booking Details</h2>
+            <form action="/submit-booking" method="POST">
+                <label for="movie">Movie:</label>
+                <input type="text" id="movie" name="movie" disabled>
+
+                <label for="theatre">Theatre:</label>
+                <select id="theatre" name="theatre">
+                    <option value="Cinema Hall 1">Cinema Hall 1</option>
+                    <option value="Cinema Hall 2">Cinema Hall 2</option>
+                </select>
+
+                <label for="show-time">Show Time:</label>
+                <input type="datetime-local" id="show-time" name="show-time">
+
+                <label for="seat">Seat Number:</label>
+                <input type="text" id="seat" name="seat" placeholder="Enter seat number">
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <button type="submit">Book Ticket</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
-
